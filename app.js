@@ -13,7 +13,9 @@ const authRouter = require("./app/auth/router");
 const wilayahRouter = require("./app/wilayah/router");
 const deliveryRouter = require("./app/delivery-addresses/router");
 const cartRouter = require("./app/cart/router");
-
+const orderRouter = require("./app/order/router");
+const invoiceRouter = require("./app/invoice/router");
+const cors = require("cors");
 var app = express();
 
 // view engine setup
@@ -25,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
 //product router
 app.use(decodeToken());
@@ -34,8 +37,9 @@ app.use("/api", tagsRouter);
 app.use("/auth", authRouter);
 app.use("/api", wilayahRouter);
 app.use("/api", deliveryRouter);
-app.use("./api", cartRouter);
-
+app.use("/api", cartRouter);
+app.use("/api", orderRouter);
+app.use("/api", invoiceRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
