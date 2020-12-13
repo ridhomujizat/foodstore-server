@@ -1,8 +1,6 @@
 const DeliveryAddress = require("./model");
 const { policyFor } = require("../policy");
 const { subject } = require("@casl/ability");
-const { json } = require("express");
-const { deleteMany } = require("./model");
 
 async function index(req, res, next) {
   let policy = policyFor(req.user);
