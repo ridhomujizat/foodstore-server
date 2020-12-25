@@ -55,10 +55,11 @@ async function getKacamatan(req, res, next) {
 }
 
 async function getDesa(req, res, next) {
-  const db_desa = path.resolve(__dirname, ",/data/villages.csv");
+  const db_desa = path.resolve(__dirname, "./data/villages.csv");
 
   try {
     let { kode_induk } = req.query;
+
     const data = await csv().fromFile(db_desa);
 
     if (!kode_induk) return res.json(data);
